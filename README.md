@@ -1,18 +1,18 @@
-# React + Vite
+# SEC Financial Explorer
 
-This is a simple web application that allows users to search for companies and view their financial data.
+This is a web application that allows users to search for public companies and view their reported financial data.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Known Limitations
 
-Currently, two official plugins are available:
+This application fetches data directly from the SEC EDGAR API. As such, there are a few known limitations:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1.  **Rate Limiting**: The SEC API has strict rate limits (currently 10 requests per second). Rapid, repeated searches may result in temporary blocks or errors.
+2.  **Missing Metrics**: Financial data is parsed from XBRL tags (US GAAP). Companies sometimes use custom or non-standard tags for certain metrics, meaning some data points (like Revenue or Net Income) may appear as "N/A" even if the company reported them.
+3.  **Search Accuracy**: The company name search relies on a local snapshot of `company_tickers.json`. Very newly listed companies might not be found by name until this file is updated. Using the 10-digit CIK is always the most accurate method.
+4.  **Single Data Point**: Currently, the application extracts and displays only the most recent reported value for each metric, rather than providing a historical multi-year trend.
 
-## React Compiler
+## Running Locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To run the application locally:
+1. `npm install`
+2. `npm run dev` (or `npx netlify dev` to run with serverless functions)
