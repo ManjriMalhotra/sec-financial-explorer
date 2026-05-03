@@ -100,7 +100,7 @@ export function CompanySummary() {
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {Object.entries(metrics).map(([key, metric]) => (
                 <div key={key} className="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-                  <p className="text-sm font-medium text-slate-500">{formatMetricLabel(key)}</p>
+                  <p className="text-sm font-bold text-slate-700">{formatMetricLabel(key)}</p>
                   {metric ? (
                     <div className="mt-3">
                       <p className="text-2xl font-semibold text-slate-950">${formatNumber(metric.value)}</p>
